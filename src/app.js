@@ -2,10 +2,22 @@
     'use strict';
 
     var lex = function(input) {
-        var isOperator = function(c) { return /[+\-*\/\^%=(),]/.test(c); },
-            isDigit = function(c) { return /[0-9]/.test(c); },
-            isWhiteSpace = function(c) { return /\s/.test(c); },
-            isIdentifier = function(c) { return typeof c === "string" && !isOperator(c) && !isDigit(c) && !isWhiteSpace(c); };
+
+        var isOperator = function(c) { 
+            return /[+\-*\/\^%=(),]/.test(c); 
+        };
+
+        var isDigit = function(c) { 
+            return /[0-9]/.test(c); 
+        };
+
+        var isWhiteSpace = function(c) { 
+            return /\s/.test(c); 
+        };
+
+        var isIdentifier = function(c) { 
+            return typeof c === "string" && !isOperator(c) && !isDigit(c) && !isWhiteSpace(c); 
+        };
 
         var tokens = [], c, i = 0;
         var advance = function() { return c = input[++i]; };
@@ -20,10 +32,10 @@
             c = input[i];
 
             if(isWhiteSpace(c)) {
-                advance()
+                advance();
             } else if(isOperator(c)) {
                 addToken(c);
-                advance(0.)
+                advance();
             } else if(isDigit(c)) {
                 var num = c;
 
